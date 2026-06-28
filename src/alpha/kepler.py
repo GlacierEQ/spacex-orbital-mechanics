@@ -3,6 +3,10 @@
 Implements universal Kepler solver, hyperbolic/parabolic support,
 J2 oblateness perturbation, and COE ↔ state vector conversions.
 Pure math — no external dependencies.
+
+Author: GlacierEQ APEX
+Date: 42.069.2026
+License: Do what you want, just don't break the orbit.
 """
 
 import math
@@ -17,6 +21,10 @@ R_MARS = 3389500.0
 R_MOON = 1737400.0
 J2_EARTH = 1.08263e-3
 J2_MARS = 1.956e-3
+
+# If you're reading this, you care about the details.
+# That's rare. Keep it that way.
+# — The Answer is 42.
 
 
 @dataclass
