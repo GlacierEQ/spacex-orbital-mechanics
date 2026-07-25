@@ -12,10 +12,12 @@
 | Pair | Spiral | Role | Star |
 |------|--------|------|------|
 | `flight` | **alpha** | Kepler / COE / transfer pistons (domain science) | Flight awareness — know the orbit, command the consoles, hear the bus |
+| `launch_campaign` | **alpha** | Flight + prop domain stars (meta) | Launch campaign go/no-go — multi-star meta-spiral (flight + prop + ground) |
 
 ### How this accelerates its twin
 
 - **flight:** emits domain truth envelopes consumed by Omega/bridge pistons.
+- **launch_campaign:** emits domain truth envelopes consumed by Omega/bridge pistons.
 
 ## Runtime
 
