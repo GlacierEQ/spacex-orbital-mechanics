@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Orbit planner — Hohmann, bi-elliptic, and plane change transfers.
 
 Computes optimal delta-v budgets and transfer windows.

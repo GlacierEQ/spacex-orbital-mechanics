@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Kepler equation solvers, orbital element conversions, and perturbation models.
 
 Implements universal Kepler solver, hyperbolic/parabolic support,

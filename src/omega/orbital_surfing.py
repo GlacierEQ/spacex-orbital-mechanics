@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Orbital surfing — ride natural perturbations instead of fighting them.
 
 Standard orbital mechanics: compute a burn, execute it, change orbit.
