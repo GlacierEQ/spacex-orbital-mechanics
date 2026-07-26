@@ -1,0 +1,28 @@
+{
+  "repo": "spacex-orbital-mechanics",
+  "algorithm": "sha256",
+  "file_count": 21,
+  "hashes": {
+    "README.md": "6c12de07d634bcb67715318963ac4d00565ec2cd01f20a6b0fdbd7c4091f779f",
+    "EASTER_EGGS.md": "0c4fc58a6163b54497fc8327ec77f4293330eea4ba636e30db202836bd450900",
+    ".gitignore": "bdf5823fb39358309d859824c0bfe95e917594bd370372743c15fe08f55f98b2",
+    "AKOS.md": "fb5d5d6e0a7409113c2d49e294ba1352c615c518d9bfc0209fa027dfb70c6650",
+    "AGENTS.md": "dfd8c0adcc1b0c4252b4230076b27833fb1d06f357401092aac00b7664e5c44b",
+    "HELIX_STRAND.md": "eff953957c6a94f7ee93e31b9b5344097a137f965e737e8300544b97378b886d",
+    "mastermind_sidecar.py": "afc4539119598fa3d18b143c6d01a7cd67c09eba9afa177b3f76100ff2ddb072",
+    "SECURITY_AND_FLEET_OPS.md": "26141c0f07d95847d679de423ddb7bdee6f3e319d204383c89a58d6d3bb610c7",
+    "ISSUE_CONTRACT.md": "d54aad6fb8963748720011d673c9ad0364b528160ee9f4b3f7c69186adf50a69",
+    "HELIX.md": "04a58cc2bfba67cb11c45ea7b93f9f64a89c8e4efc53d617fcf2689931b3fbf7",
+    ".pytest_cache/CACHEDIR.TAG": "37dc88ef9a0abeddbe81053a6dd8fdfb13afb613045ea1eb4a5c815a74a3bde4",
+    ".pytest_cache/README.md": "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad",
+    ".pytest_cache/.gitignore": "3ed731b65d06150c138e2dadb0be0697550888a6b47eb8c45ecc9adba8b8e9bd",
+    ".pytest_cache/v/cache/nodeids": "a01cbafcd737fd2f086cfe6b6e6c340ec356e87efbc60e24c5e5f9b49e40bf69",
+    "tests/test_core.py": "151fc51331e6df3d0f41bb583e4243a6e941506d8f1191509d30199793f7be7f",
+    "tests/test_orbital.py": "e71a58e0e9c194a6a8eaab1580297fd59058d75ed9aa2735416ebad26ae229b9",
+    ".shadow/config.json": "b5553a0d7190c205ca052b0e4002f27bdf19b4cced6368b6b494c70e3e1ddba4",
+    ".github/workflows/ci.yml": "393542f8109cac2611d6ab41b8b062e6cc8be46894379568f15c0b7e2c1a639f",
+    "src/omega/orbital_surfing.py": "cb039d8177c1fff589c9e6618739677bd37313cbb7396fc3dbb4250b1192aebc",
+    "src/omega/orbit_planner.py": "1ff3f7e7a5ebf47931b7d7f7274efd690573b7a61945ea4c1bc4695a7c7a8676",
+    "src/alpha/kepler.py": "40710977c37bf852f001b8e1ed8ba730936fcaafa4d25f77872d0699de5d418d"
+  }
+}
