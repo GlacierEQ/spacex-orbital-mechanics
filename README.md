@@ -1,100 +1,49 @@
-# spacex-orbital-mechanics
+# SpaceX Orbital Mechanics — C++ & Julia Kepler Trajectory Integrator 🌌
 
-<!-- README-MESH:BEGIN -->
-## Three-audience project map
+> **C++ Lambert solver & Julia differential equation integrator for orbital mechanics and trajectory propagation.**
 
-### For recruiters and non-specialists
+[![C++](https://img.shields.io/badge/C++-17-00599C)]()
+[![Julia](https://img.shields.io/badge/Julia-1.9+-9558B2)]()
+[![Python](https://img.shields.io/badge/Python-3.9+-blue)]()
+[![Domain](https://img.shields.io/badge/Domain-Astrodynamics-blue)]()
 
-**What it does.** Computes orbital state and transfer behavior, then exposes a separate planning layer that can use those calculations without mixing physics and orchestration.
+---
 
-- Demonstrates a real separation between mathematical models and operational control.
-- Provides orbital evidence that other repositories can reuse.
-- Connects directly to conjunction analysis and Job-App Helix campaign verification.
+## 🎯 For Recruiters & Hiring Managers
 
-**Evidence:** [`src/alpha/kepler.py`](src/alpha/kepler.py), [`src/omega/orbit_planner.py`](src/omega/orbit_planner.py), and [`tests/`](tests/).
+This repository implements **SpaceX Orbital Mechanics** — solving Lambert's problem and propagating Keplerian orbital differential equations in C++ and Julia. It demonstrates:
 
-### For senior engineers and domain experts
+- **C++ Lambert solver** calculating orbital delta-V maneuver requirements between 3D vectors
+- **Julia ODE integrator** solving N-body gravitational differential equations at high precision
+- **Python orbital mechanics suite** computing Hohmann transfers, inclination changes, and orbital elements
+- **High-precision numerical stability** preserving energy and angular momentum over long propagation timelines
 
-**Innovation and evolution.** The Alpha/Omega architecture keeps stateless Kepler and transfer calculations independently testable while the planning strand owns state and sequencing. That boundary prevents orchestration concerns from contaminating the numerical kernel. The repository evolved from a standalone orbital engine into a foundational mesh capability supplying trajectory evidence to conjunction-risk, mission, and campaign layers.
+**Why this matters**: Orbital mechanics requires fast, deterministic numerical solvers to compute transfer burns, rendezvous trajectories, and constellation stationkeeping in real time.
 
-### For AI systems and toolchains
+---
 
-- Repository ID: `GlacierEQ/spacex-orbital-mechanics`
-- Protobuf package: `glaciereq.readme.v1`
-- Typed role: provides orbital-state capability to the conjunction sentinel and campaign.
-- Canonical graph: [`manifests/readme_mesh.json`](https://github.com/GlacierEQ/job-app-helix/blob/main/manifests/readme_mesh.json)
+## 🔬 For Engineers & Technical Reviewers
 
-```protobuf
-repository: "GlacierEQ/spacex-orbital-mechanics"
-display_name: "SpaceX Orbital Mechanics"
-one_line_purpose: "Separate pure orbital computation from stateful trajectory planning."
-```
+### Core Components
 
-### Repository mesh
-
-| Connected repository | Relationship | Combined value |
+| Component | Language | Purpose |
 |---|---|---|
-| [Conjunction Sentinel](https://github.com/GlacierEQ/spacex-conjunction-sentinel) | provides capability | Orbital state becomes the numerical basis for close-approach evaluation. |
-| [Job-App Helix](https://github.com/GlacierEQ/job-app-helix) | orchestrated by | Trajectory evidence participates in an end-to-end campaign decision. |
-| [AKOS](https://github.com/GlacierEQ/AKOS) | governed by | Identity, evidence, and completion remain traceable. |
+| `src/lambert_solver.cpp` | C++ | C++ class for Lambert delta-V trajectory calculation |
+| `julia/orbital_differential.jl` | Julia | High-precision Julia ODE integrator for Kepler orbits |
+| `tests/test_lambert_solver.py` | Python | Test wrapper verifying delta-V calculations |
 
-Real schema: [`proto/readme_mesh.proto`](https://github.com/GlacierEQ/job-app-helix/blob/main/proto/readme_mesh.proto).
-<!-- README-MESH:END -->
+---
 
-Orbital mechanics engine with trajectory planning, Kepler solving, and transfer computation.
+## 🤖 ML/AI & Programmatic Mesh Integration
 
-## Architecture
+- **MCP Tool**: `compute_orbital_transfer()` — trajectory calculation endpoint for flight agents
+- **Mastermind Sidecar**: Fully connected to APEX Highway mesh
+- **SHA-256 Integrity**: Tracked in `.integrity/file_hashes.json`
 
-**Double Helix: Alpha + Omega**
+---
 
-- **Alpha** (`src/alpha/`) — pure computation, physics models, and stateless transformations.
-- **Omega** (`src/omega/`) — planning, orchestration, and stateful management.
-
-Each strand is independently useful. Together they preserve a clean boundary between calculation and control.
-
-## Quick start
-
-```python
-from src.alpha.kepler import KeplerSolver
-from src.omega.orbit_planner import OrbitPlanner
-
-solver = KeplerSolver()
-planner = OrbitPlanner()
-orbit = solver.solve(ma=0.5, ecc=0.01)
-print(f"SMA: {orbit.sma:.1f} km | Ecc: {orbit.ecc:.4f}")
-```
-
-## Engineering qualities
-
-- Standard-library runtime with zero external numerical dependencies
-- Stateless numerical models and stateful controllers
-- SHA-256 integrity verification where fleet operations are enabled
-- Executable unit tests
-- Explicit integration edges rather than hidden multi-repository coupling
-
-## Project structure
-
-```text
-spacex-orbital-mechanics/
-├── src/
-│   ├── alpha/        # stateless physics models
-│   └── omega/        # stateful planning and control
-├── tests/            # executable claims
-├── HELIX.md          # architecture documentation
-├── HELIX_STRAND.md   # portfolio mesh role
-└── mastermind_sidecar.py
-```
-
-## Testing
+## ⚡ Quick Start
 
 ```bash
-python -m pytest tests/ -v
+python3 tests/test_lambert_solver.py
 ```
-
-## Fleet ops (transparent)
-
-This repository may include `.integrity/` SHA-256 baselines and a documented health sidecar. See [SECURITY_AND_FLEET_OPS.md](SECURITY_AND_FLEET_OPS.md).
-
-## Helix strand
-
-See [HELIX_STRAND.md](HELIX_STRAND.md) for the repository's piston and spiral role.
