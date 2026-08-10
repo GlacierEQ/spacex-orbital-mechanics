@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/spacex-orbital-mechanics",
+  "source_sha": "785ac54f1bd64622a05c6daa4b97bfd6a98c021fd629f9cabaf05009e8012168",
+  "proof_receipt_digest": "fdce71c5c54bf92491584b147ea619643bbc07bdddfd612401e8959c2d871f71",
+  "not_after": 1788927149.234226,
+  "mac": "42c9e2114bec257f5f742c9568a32911f44fa39fededea2886e0ffa4cf5b6bc2",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}

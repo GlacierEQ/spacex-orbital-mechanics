@@ -1,0 +1,26 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/spacex-orbital-mechanics",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "785ac54f1bd64622a05c6daa4b97bfd6a98c021fd629f9cabaf05009e8012168",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "alpha.kepler",
+    "ok": true,
+    "repository": "GlacierEQ/spacex-orbital-mechanics",
+    "smoke": {
+      "args": [
+        "1.0"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "class",
+      "method": "sun_sync_altitude",
+      "module_local": true,
+      "name": "J2Perturbation",
+      "result": 3982065.218873322
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}
