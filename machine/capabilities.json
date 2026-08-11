@@ -1,1 +1,12 @@
-{"capabilities": ["hyper-scaling"]}
+{
+  "schema": "glaciereq.repository-capabilities.v1",
+  "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+  "capabilities": [
+    "kepler-equation-solving",
+    "orbital-state-element-conversion",
+    "classical-transfer-estimation",
+    "plane-change-estimation",
+    "bounded-j2-secular-rate-modeling",
+    "local-orbital-math-verification"
+  ]
+}
