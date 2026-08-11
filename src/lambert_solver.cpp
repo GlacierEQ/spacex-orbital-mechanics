@@ -1,30 +1,34 @@
-#include <iostream>
 #include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <stdexcept>
 
-struct Vector3D {
-    double x, y, z;
-    double magnitude() const {
-        return std::sqrt(x*x + y*y + z*z);
-    }
-};
+// Historical filename retained for repository lineage.
+// This program is a two-radius Hohmann transfer-speed estimate, NOT a Lambert
+// boundary-value solver. It does not solve for a trajectory from r1/r2 vectors
+// and time-of-flight and therefore must not be represented as Lambert capability.
 
-class LambertSolver {
-public:
-    double compute_delta_v(const Vector3D& r1, const Vector3D& r2, double tof_seconds) {
-        double mu = 398600.4418; // Earth gravitational parameter km^3/s^2
-        double r1_mag = r1.magnitude();
-        double r2_mag = r2.magnitude();
-        double semi_major_axis = (r1_mag + r2_mag) / 2.0;
-        double v_transfer = std::sqrt(mu * (2.0 / r1_mag - 1.0 / semi_major_axis));
-        return v_transfer;
+constexpr const char* kEvidenceState =
+    "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY";
+constexpr double kMuEarthKm3S2 = 398600.4418;
+
+double hohmann_departure_speed_km_s(double r1_km, double r2_km) {
+    if (!(r1_km > 0.0) || !(r2_km > 0.0)) {
+        throw std::invalid_argument("orbital radii must be positive");
     }
-};
+    const double transfer_a_km = (r1_km + r2_km) / 2.0;
+    return std::sqrt(
+        kMuEarthKm3S2 * (2.0 / r1_km - 1.0 / transfer_a_km));
+}
 
 int main() {
-    LambertSolver solver;
-    Vector3D r1{6771.0, 0.0, 0.0};
-    Vector3D r2{0.0, 42164.0, 0.0};
-    double dv = solver.compute_delta_v(r1, r2, 18000.0);
-    std::cout << "Lambert Transfer Delta-V: " << dv << " km/s" << std::endl;
+    const double r1_km = 6771.0;
+    const double r2_km = 42164.0;
+    const double departure_speed = hohmann_departure_speed_km_s(r1_km, r2_km);
+
+    std::cout << kEvidenceState << "\n";
+    std::cout << std::fixed << std::setprecision(6)
+              << "Hohmann transfer departure speed estimate: "
+              << departure_speed << " km/s\n";
     return 0;
 }
