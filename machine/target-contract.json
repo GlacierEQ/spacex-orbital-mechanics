@@ -5,18 +5,38 @@
     "family": "elite-estate"
   },
   "current": {
-    "state": "PROMOTED",
+    "state": "TESTED",
     "implemented": true,
     "tested": true,
     "deployed": false
   },
+  "verified_capability": "deterministic-local-orbital-mechanics-calculation",
+  "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+  "admitted_paths": [
+    "src/alpha/kepler.py",
+    "src/omega/orbit_planner.py",
+    "tests/test_orbital.py",
+    "tests/test_public_truth.py",
+    "scripts/verify_public_surface.py"
+  ],
+  "reference_only_paths": [
+    "src/lambert_solver.cpp",
+    "src/orbital_integrator.jl"
+  ],
   "nonclaims": [
-    "no employer affiliation",
-    "no production deployment without receipt"
+    "no SpaceX affiliation or proprietary access",
+    "no production Lambert solver",
+    "no N-body or high-precision long-duration integrator proof",
+    "no flight-dynamics, guidance, navigation, rendezvous, or command authority",
+    "no real telemetry, ephemeris, MCP, provider, or mesh integration",
+    "no production performance, safety certification, or deployment"
   ],
   "donor_plan": {
-    "mode": "none",
-    "donors": []
-  },
-  "frozen_at": "2026-08-10T04:12Z"
+    "mode": "bounded-capability-donor",
+    "donors": [
+      "kepler-equation-solving",
+      "orbital-state-element-conversion",
+      "classical-transfer-estimation"
+    ]
+  }
 }
