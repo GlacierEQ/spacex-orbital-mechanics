@@ -18,6 +18,10 @@ def read(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
+def load(path: str) -> dict:
+    return json.loads(read(path))
+
+
 def test_public_surface_is_explicitly_non_affiliated_and_bounded() -> None:
     readme = read("README.md")
     assert TOKEN in readme
@@ -44,20 +48,63 @@ def test_julia_reference_is_labeled_first_order_and_non_production() -> None:
     assert "euler_two_body_step" in julia
 
 
-def test_machine_truth_matches_current_scope() -> None:
-    capabilities = json.loads(read("machine/capabilities.json"))
-    target = json.loads(read("machine/target-contract.json"))
-    excellence = json.loads(read("machine/excellence-state.json"))
+def test_machine_projection_matches_evidence_without_erasing_target() -> None:
+    capabilities = load("machine/capabilities.json")
+    target = load("machine/target-contract.json")
+    planes = load("machine/capability-planes.json")
+    excellence = load("machine/excellence-state.json")
+
     assert "hyper-scaling" not in capabilities["capabilities"]
     assert capabilities["evidence_token"] == TOKEN
-    assert target["evidence_token"] == TOKEN
-    assert target["verified_capability"] == (
+
+    evidence = target["evidence_checkpoint"]
+    assert evidence["evidence_token"] == TOKEN
+    assert evidence["verified_capability"] == (
         "deterministic-local-orbital-mechanics-calculation"
     )
-    assert target["current"]["deployed"] is False
-    assert excellence["principal_state"] == "TESTED"
-    assert excellence["evidence_token"] == TOKEN
+    assert evidence["canonical_proof_head"] == (
+        "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
+    )
+    assert target["implementation_checkpoint"]["deployed"] is False
+    assert target["target_architecture"]["status"] == (
+        "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE"
+    )
+    assert len(target["target_architecture"]["objectives"]) >= 8
+
+    assert planes["projection"]["projection_may_overwrite_canonical_or_target"] is False
+    assert planes["target"]["status"] == "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE"
+    target_states = {item["state"] for item in planes["target"]["items"]}
+    assert "UNVERIFIED_TARGET" in target_states
+    assert "PARTIALLY_IMPLEMENTED_TARGET" in target_states
+
+    assert excellence["product_state"] == "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE"
+    assert excellence["evidence_state"] == "EXACT_HEAD_VERIFIED"
+    assert excellence["projection_state"] == TOKEN
+    assert excellence["target_state"] == "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE"
+    assert excellence["evidence_checkpoint"]["head_sha"] == (
+        "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
+    )
     assert "HYPER_VALIDATED" not in json.dumps(excellence, sort_keys=True)
+
+
+def test_disproven_historical_claims_return_only_as_explicit_targets() -> None:
+    readme = read("README.md")
+    planes = load("machine/capability-planes.json")
+    targets = {item["capability"]: item for item in planes["target"]["items"]}
+
+    assert targets["real Lambert boundary-value solver"]["state"] == "UNVERIFIED_TARGET"
+    assert targets["N-body and perturbation-aware orbital propagation"]["state"] == (
+        "UNVERIFIED_TARGET"
+    )
+    assert targets["higher-order or adaptive two-body propagation"]["state"] == (
+        "PARTIALLY_IMPLEMENTED_TARGET"
+    )
+    assert "programmatic orbital-calculation service" in targets
+    assert "governed orbital-event or agent integration" in targets
+
+    assert "C++ Lambert solver calculating" not in readme
+    assert "N-body gravitational differential equations at high precision" not in readme
+    assert "trajectory calculation endpoint for flight agents" not in readme
 
 
 def test_kepler_and_state_conversion_reproduce_bounded_invariants() -> None:

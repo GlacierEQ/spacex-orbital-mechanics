@@ -1,68 +1,47 @@
 {
-  "schema": "glaciereq.repo-excellence-state.v1",
+  "schema": "glaciereq.repo-excellence-state.v2",
   "repository": "GlacierEQ/spacex-orbital-mechanics",
-  "principal_state": "TESTED",
-  "state": "TESTED",
+  "principal_state": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
+  "product_state": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
+  "evidence_state": "EXACT_HEAD_VERIFIED",
+  "projection_state": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+  "target_state": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+  "state_planes_ref": "machine/capability-planes.json",
   "verified_capability": "deterministic-local-orbital-mechanics-calculation",
   "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+  "evidence_checkpoint": {
+    "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "workflow_receipts": [
+      {"name": "Public Orbital Math Truth Gate", "id": 31534343810, "conclusion": "success"},
+      {"name": "CI", "id": 31534343822, "conclusion": "success"}
+    ]
+  },
   "gates": {
-    "IDENTITY_RESOLVED": {
-      "status": "PASS",
-      "evidence": "github GlacierEQ/spacex-orbital-mechanics"
-    },
-    "TARGET_CONTRACT_FROZEN": {
-      "status": "PASS",
-      "evidence": "machine/target-contract.json"
-    },
-    "CENTRAL_MECHANISM_PRESENT": {
-      "status": "PASS",
-      "evidence": "src/alpha/kepler.py and src/omega/orbit_planner.py"
-    },
-    "DETERMINISTIC_PROOF_GREEN": {
-      "status": "PENDING",
-      "evidence": "requires current exact-head Public Orbital Math Truth Gate"
-    },
-    "ADVERSARIAL_SURVIVAL": {
-      "status": "PENDING",
-      "evidence": "current exact-head failure-path proof required"
-    },
-    "OPERABLE_AND_OBSERVABLE": {
-      "status": "PENDING",
-      "evidence": "scripts/operate.py preserved; current exact-head gate required"
-    },
-    "PROOF_RECEIPT_BOUND": {
-      "status": "PENDING",
-      "evidence": "historical local proof receipt is not promoted as current GitHub canonical proof"
-    },
-    "AUTHORITY_BOUND": {
-      "status": "PENDING",
-      "evidence": "local promotion authority is not flight-dynamics or production authority"
-    },
-    "PROJECTION_TRUTH_CLOSED": {
-      "status": "PENDING",
-      "evidence": "README and machine surfaces truth-hardened; exact-head gate required"
-    },
-    "CANONICAL_POSITION_RESOLVED": {
-      "status": "PENDING"
-    },
-    "EVOLUTION_CURSOR_DEFINED": {
-      "status": "PASS",
-      "evidence": "next: exact-head orbital truth gate then Helix surface admission"
-    }
+    "IDENTITY_RESOLVED": {"status": "PASS", "evidence": "github GlacierEQ/spacex-orbital-mechanics"},
+    "TARGET_CONTRACT_FROZEN": {"status": "PASS", "evidence": "machine/target-contract.json preserves future architecture separately from current proof"},
+    "CENTRAL_MECHANISM_PRESENT": {"status": "PASS", "evidence": "Python Kepler/state-vector/classical-transfer engine plus bounded C++ and Julia references"},
+    "DETERMINISTIC_PROOF_GREEN": {"status": "PASS", "evidence": "Public Orbital Math Truth Gate 31534343810 and CI 31534343822 on exact b99a1f7ea0534d3a268f9bea432399c9862bd1e4"},
+    "ADVERSARIAL_SURVIVAL": {"status": "PASS", "evidence": "repository-owned invariant and public-truth tests on exact proof head"},
+    "OPERABLE_AND_OBSERVABLE": {"status": "PASS", "evidence": "repository-owned local orbital-math verification and operation surfaces"},
+    "PROOF_RECEIPT_BOUND": {"status": "PASS", "evidence": "exact-head GitHub Actions receipts are bound to the evidence plane"},
+    "AUTHORITY_BOUND": {"status": "PASS", "evidence": "local orbital math authority is not flight-dynamics mission or command authority"},
+    "PROJECTION_TRUTH_CLOSED": {"status": "PASS", "evidence": "Public Orbital Math Truth Gate 31534343810"},
+    "CANONICAL_POSITION_RESOLVED": {"status": "PENDING", "evidence": "estate-level canonical position remains independently governed"},
+    "EVOLUTION_CURSOR_DEFINED": {"status": "PASS", "evidence": "advance target solvers and propagation research without replacing preserved exact-head evidence"}
   },
   "nonclaims": [
     "no SpaceX affiliation or proprietary trajectory data",
     "no production Lambert solver",
     "no N-body or high-precision propagator proof",
-    "no flight-dynamics, guidance, navigation, rendezvous, or command authority",
-    "no live telemetry, ephemeris, MCP, provider, APEX, AKOS, or Mastermind runtime integration",
-    "no production deployment without external receipt"
+    "no flight-dynamics guidance navigation rendezvous or command authority",
+    "no live telemetry ephemeris MCP provider APEX AKOS or Mastermind runtime integration",
+    "no production deployment performance or safety certification"
   ],
   "contract_ref": "machine/target-contract.json",
   "scores_ref": "machine/excellence-scores.json",
-  "evolution_cursor": "next:exact-head-public-orbital-truth-gate_then_helix_admission",
+  "evolution_cursor": "next:advance_preserved_orbital_target_architecture_without_projection_contamination",
   "supersedes": {
-    "generic_migration_state": "PROMOTED",
-    "reason": "generic estate migration state contained placeholder proof identity and exceeded current repository-native claim scope"
+    "single_axis_principal_state": "TESTED",
+    "reason": "TESTED represented an evidence/projection checkpoint and incorrectly replaced product maturity and target state"
   }
 }
