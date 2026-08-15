@@ -1,0 +1,139 @@
+{
+  "schema": "glaciereq.repository-capability-planes.v1",
+  "repository": "GlacierEQ/spacex-orbital-mechanics",
+  "governance_authority": {
+    "repository": "GlacierEQ/AKOS",
+    "canonical_commit": "09660d20fe1cfe03de169ce327cbe0e86f054e63",
+    "contract": "governance/projection_non_interference.v1.json"
+  },
+  "provenance": {
+    "pre_truth_hardening_head": "3c37d66ff68846420036a9e714d2e3b2021451db",
+    "truth_hardening_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "current_parent_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "historical_intent_source": "README.md@3c37d66ff68846420036a9e714d2e3b2021451db",
+    "rule": "historical intent is preserved only as provenance or target state; claims disproven by current source inspection are not restored as implementation facts"
+  },
+  "canonical": {
+    "identity": "orbital-mechanics and astrodynamics numerical-method engineering laboratory",
+    "original_intent": [
+      "orbital transfer and maneuver calculation",
+      "Kepler and orbital-state conversion",
+      "trajectory propagation research",
+      "higher-fidelity numerical orbital dynamics",
+      "rendezvous and transfer-planning workflows",
+      "programmatic orbital calculation services",
+      "governed orchestration integration"
+    ],
+    "non_affiliation": "independent GlacierEQ portfolio system; no SpaceX affiliation, endorsement, proprietary trajectory access, or flight authority"
+  },
+  "implementation": {
+    "status": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
+    "implemented_capabilities": [
+      "kepler-equation-solving",
+      "orbital-state-element-conversion",
+      "classical-transfer-estimation",
+      "plane-change-estimation",
+      "bounded-j2-secular-rate-modeling",
+      "local-orbital-math-verification"
+    ],
+    "reference_or_partial": [
+      "C++ classical Hohmann transfer-speed reference in the historical lambert_solver.cpp path",
+      "Julia first-order two-body Euler propagation reference"
+    ],
+    "source_paths": [
+      "src/alpha/kepler.py",
+      "src/omega/orbit_planner.py",
+      "src/lambert_solver.cpp",
+      "src/orbital_integrator.jl"
+    ]
+  },
+  "evidence": {
+    "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+    "verified_capability": "deterministic-local-orbital-mechanics-calculation",
+    "canonical_proof_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "proof_receipts": [
+      {
+        "kind": "github_actions",
+        "name": "Public Orbital Math Truth Gate",
+        "id": 31534343810,
+        "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+        "conclusion": "success"
+      },
+      {
+        "kind": "github_actions",
+        "name": "CI",
+        "id": 31534343822,
+        "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+        "conclusion": "success"
+      }
+    ],
+    "rule": "evidence constrains current projection claimability and does not replace canonical identity or future research targets"
+  },
+  "projection": {
+    "public_claim_ceiling": "local deterministic orbital-math library for Kepler solving, state/element conversion, classical transfer and plane-change estimates, and bounded J2 secular-rate modeling",
+    "public_readme": "README.md",
+    "projection_may_omit_unverified_target_state": true,
+    "projection_may_overwrite_canonical_or_target": false,
+    "nonclaims": [
+      "no production Lambert boundary-value solver",
+      "no N-body or high-precision long-duration propagator proof",
+      "no flight-dynamics, guidance, navigation, rendezvous, or command authority",
+      "no real telemetry, ephemeris, provider, MCP, or mesh integration",
+      "no production performance, safety certification, or deployment"
+    ]
+  },
+  "target": {
+    "status": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+    "items": [
+      {
+        "capability": "real Lambert boundary-value solver",
+        "origin": "historical README",
+        "state": "UNVERIFIED_TARGET",
+        "note": "historical C++ implementation did not solve Lambert's problem; a correct time-of-flight boundary-value solver remains a future target"
+      },
+      {
+        "capability": "higher-order or adaptive two-body propagation",
+        "origin": "historical Julia integration intent",
+        "state": "PARTIALLY_IMPLEMENTED_TARGET",
+        "note": "current Julia reference is first-order Euler; higher-order and adaptive integration remain targets"
+      },
+      {
+        "capability": "N-body and perturbation-aware orbital propagation",
+        "origin": "historical README",
+        "state": "UNVERIFIED_TARGET",
+        "note": "not present in the current Julia reference; preserved as an astrodynamics research target"
+      },
+      {
+        "capability": "numerical invariants and long-duration error analysis",
+        "origin": "historical numerical-stability ambition",
+        "state": "UNVERIFIED_TARGET",
+        "note": "future benchmark target for energy, angular momentum, convergence and accumulated-error analysis"
+      },
+      {
+        "capability": "rendezvous and transfer-planning workflows",
+        "origin": "historical recruiter narrative",
+        "state": "UNVERIFIED_TARGET",
+        "note": "generic astrodynamics planning target; no current flight-agent or mission-authority claim"
+      },
+      {
+        "capability": "programmatic orbital-calculation service",
+        "origin": "historical MCP endpoint intent",
+        "state": "UNVERIFIED_TARGET",
+        "note": "generic governed service target; no current live MCP or provider integration"
+      },
+      {
+        "capability": "governed orbital-event or agent integration",
+        "origin": "historical Mastermind/APEX mesh intent",
+        "state": "UNVERIFIED_TARGET",
+        "note": "preserved as generic integration architecture without asserting a live mesh"
+      },
+      {
+        "capability": "performance and stability benchmarking across orbital solvers",
+        "origin": "historical high-precision performance narrative",
+        "state": "UNVERIFIED_TARGET",
+        "note": "future reproducible benchmark target; no current high-precision or real-time performance claim"
+      }
+    ],
+    "rule": "targets advance only through implementation and new evidence; failure to prove a target today may narrow public projection but may not erase the target"
+  }
+}
