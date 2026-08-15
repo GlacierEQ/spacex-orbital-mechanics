@@ -1,42 +1,48 @@
 {
-  "schema": "glaciereq.repo-target-contract.v1",
+  "schema": "glaciereq.repo-target-contract.v2",
   "identity": {
     "repository_id": "GlacierEQ/spacex-orbital-mechanics",
-    "family": "elite-estate"
+    "canonical_identity": "orbital-mechanics and astrodynamics numerical-method engineering laboratory",
+    "non_affiliation": "independent GlacierEQ portfolio system; no SpaceX affiliation, endorsement, proprietary trajectory access, or flight authority"
   },
-  "current": {
-    "state": "TESTED",
+  "authority": {
+    "projection_non_interference": "GlacierEQ/AKOS@09660d20fe1cfe03de169ce327cbe0e86f054e63/governance/projection_non_interference.v1.json",
+    "capability_planes": "machine/capability-planes.json",
+    "rule": "current evidence constrains projection claimability; the target contract preserves future numerical-method architecture independently"
+  },
+  "implementation_checkpoint": {
+    "state": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
     "implemented": true,
     "tested": true,
-    "deployed": false
+    "deployed": false,
+    "reference_only_paths": ["src/lambert_solver.cpp", "src/orbital_integrator.jl"]
   },
-  "verified_capability": "deterministic-local-orbital-mechanics-calculation",
-  "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
-  "admitted_paths": [
-    "src/alpha/kepler.py",
-    "src/omega/orbit_planner.py",
-    "tests/test_orbital.py",
-    "tests/test_public_truth.py",
-    "scripts/verify_public_surface.py"
-  ],
-  "reference_only_paths": [
-    "src/lambert_solver.cpp",
-    "src/orbital_integrator.jl"
-  ],
+  "evidence_checkpoint": {
+    "verified_capability": "deterministic-local-orbital-mechanics-calculation",
+    "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+    "canonical_proof_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "claim_ceiling_applies_to": "projection"
+  },
+  "target_architecture": {
+    "status": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+    "source": "machine/capability-planes.json#target",
+    "objectives": [
+      "implement and verify a real time-of-flight Lambert boundary-value solver",
+      "advance the Julia reference to higher-order or adaptive two-body propagation",
+      "develop N-body and perturbation-aware propagation as a separately verified research capability",
+      "build reproducible energy angular-momentum convergence and accumulated-error benchmarks",
+      "develop generic rendezvous and transfer-planning workflows",
+      "expose a governed programmatic orbital-calculation service",
+      "publish bounded orbital events into a governed orchestration or agent integration plane",
+      "benchmark numerical performance and stability across solver strategies"
+    ],
+    "promotion_rule": "each objective remains target state until implementation and source-bound proof exist; unsupported historical claims are not revived as current facts"
+  },
   "nonclaims": [
-    "no SpaceX affiliation or proprietary access",
     "no production Lambert solver",
-    "no N-body or high-precision long-duration integrator proof",
-    "no flight-dynamics, guidance, navigation, rendezvous, or command authority",
-    "no real telemetry, ephemeris, MCP, provider, or mesh integration",
-    "no production performance, safety certification, or deployment"
-  ],
-  "donor_plan": {
-    "mode": "bounded-capability-donor",
-    "donors": [
-      "kepler-equation-solving",
-      "orbital-state-element-conversion",
-      "classical-transfer-estimation"
-    ]
-  }
+    "no current N-body or high-precision long-duration propagator proof",
+    "no flight-dynamics guidance navigation rendezvous or command authority",
+    "no real telemetry ephemeris MCP provider or mesh integration",
+    "no production performance safety certification or deployment"
+  ]
 }
