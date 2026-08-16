@@ -88,8 +88,10 @@
       {
         "capability": "real Lambert boundary-value solver",
         "origin": "historical README",
-        "state": "UNVERIFIED_TARGET",
-        "note": "historical C++ implementation did not solve Lambert's problem; a correct time-of-flight boundary-value solver remains a future target"
+        "state": "IMPLEMENTED_RESEARCH_PLANE",
+        "note": "historical C++ implementation did not solve Lambert's problem; a correct time-of-flight boundary-value solver remains a future target",
+        "path": "src/alpha/lambert.py",
+        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
       },
       {
         "capability": "higher-order or adaptive two-body propagation",
@@ -135,5 +137,27 @@
       }
     ],
     "rule": "targets advance only through implementation and new evidence; failure to prove a target today may narrow public projection but may not erase the target"
+  },
+  "implemented": {
+    "status": "RESTORED_BY_COUNTER_ENGINEERING",
+    "items": [
+      {
+        "capability": "real Lambert boundary-value solver",
+        "state": "IMPLEMENTED_RESEARCH_PLANE",
+        "path": "src/alpha/lambert.py",
+        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY",
+        "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15"
+      },
+      {
+        "capability": "Lambert-cost porkchop samples",
+        "state": "IMPLEMENTED_RESEARCH_PLANE",
+        "path": "src/omega/orbit_planner.py",
+        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
+      }
+    ]
+  },
+  "recovery": {
+    "law": "MAXIMUM_COHERENT_ADVANCE",
+    "rule": "governance routes power; does not amputate mechanisms to satisfy a smaller proof harness"
   }
 }

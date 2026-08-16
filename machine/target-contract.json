@@ -15,13 +15,18 @@
     "implemented": true,
     "tested": true,
     "deployed": false,
-    "reference_only_paths": ["src/lambert_solver.cpp", "src/orbital_integrator.jl"]
+    "reference_only_paths": [
+      "src/lambert_solver.cpp",
+      "src/orbital_integrator.jl"
+    ],
+    "lambert": "src/alpha/lambert.py"
   },
   "evidence_checkpoint": {
     "verified_capability": "deterministic-local-orbital-mechanics-calculation",
     "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
-    "canonical_proof_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
-    "claim_ceiling_applies_to": "projection"
+    "canonical_proof_head": "COUNTER_ENGINEERING_LIVE_HEAD",
+    "claim_ceiling_applies_to": "projection",
+    "prior_truth_harden_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
   },
   "target_architecture": {
     "status": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
@@ -34,7 +39,15 @@
       "develop generic rendezvous and transfer-planning workflows",
       "expose a governed programmatic orbital-calculation service",
       "publish bounded orbital events into a governed orchestration or agent integration plane",
-      "benchmark numerical performance and stability across solver strategies"
+      "benchmark numerical performance and stability across solver strategies",
+      "N-body and perturbation-aware orbital propagation",
+      "programmatic orbital-calculation service",
+      "governed orbital-event or agent integration",
+      "higher-order integrator suite",
+      "mission design optimization",
+      "covariance realism",
+      "sensor fusion",
+      "operator console"
     ],
     "promotion_rule": "each objective remains target state until implementation and source-bound proof exist; unsupported historical claims are not revived as current facts"
   },
@@ -44,5 +57,16 @@
     "no flight-dynamics guidance navigation rendezvous or command authority",
     "no real telemetry ephemeris MCP provider or mesh integration",
     "no production performance safety certification or deployment"
-  ]
+  ],
+  "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
+  "verified_capability": "deterministic-local-orbital-mechanics-calculation",
+  "implemented_capability": "repository-native-lambert-two-body",
+  "current": {
+    "deployed": false
+  },
+  "recovery": {
+    "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15",
+    "action": "restored repository-native Lambert solver; expanded truth planes instead of deleting power",
+    "law": "MAXIMUM_COHERENT_ADVANCE"
+  }
 }

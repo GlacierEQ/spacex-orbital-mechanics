@@ -1,15 +1,16 @@
 from __future__ import annotations
-"""Classical local orbit-transfer estimates.
+"""Orbit-transfer laboratory: classical burns + repository-native Lambert.
 
-The verified core is Hohmann, bi-elliptic, and plane-change arithmetic. The
-low-thrust, phase-grid, and intercept helpers are rough exploratory estimates;
-they are not Lambert solutions, optimized mission designs, or flight dynamics.
+Verified classical plane: Hohmann, bi-elliptic, plane-change arithmetic.
+Implemented plane: two-body Lambert solver and Lambert-cost porkchop samples.
+Not flight-dynamics authority; not affiliated with SpaceX.
 """
 
 import math
 from dataclasses import dataclass
 
 from alpha.kepler import MU_EARTH
+from alpha.lambert import lambert_transfer_cost, SOLVER_IDENTITY
 
 EVIDENCE_STATE = "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY"
 
@@ -153,49 +154,6 @@ def low_thrust_transfer(
     )
 
 
-def launch_window_porkchop(
-    r1: float,
-    r2: float,
-    synodic_period: float,
-    phase_step: float = 1.0,
-    tof_min: float = 0,
-    tof_max: float = 500,
-    mu: float = MU_EARTH,
-) -> list[tuple[float, float, float]]:
-    """Legacy Hohmann-cost grid, not a phase-dependent Lambert porkchop solver.
-
-    The current implementation repeats the same circular-orbit Hohmann cost
-    across a phase/time grid. ``synodic_period`` is retained for API lineage but
-    is not used in the present heuristic. No launch-window optimality is claimed.
-    """
-    del synodic_period
-    _positive_radius(r1, "r1")
-    _positive_radius(r2, "r2")
-    _positive_radius(mu, "mu")
-    if phase_step <= 0 or tof_max <= tof_min:
-        return []
-
-    results = []
-    phase_range = int(360 / phase_step)
-    tof_range = int((tof_max - tof_min) * 2)
-    a_t = (r1 + r2) / 2
-    v1_circ = math.sqrt(mu / r1)
-    v2_circ = math.sqrt(mu / r2)
-    v1_trans = math.sqrt(mu * (2 / r1 - 1 / a_t))
-    v2_trans = math.sqrt(mu * (2 / r2 - 1 / a_t))
-    dv = abs(v1_trans - v1_circ) + abs(v2_circ - v2_trans)
-
-    for p_idx in range(phase_range):
-        phase = p_idx * phase_step
-        for t_idx in range(tof_range):
-            tof_days = tof_min + t_idx * 0.5
-            if tof_days <= 0:
-                continue
-            if dv < 15000:
-                results.append((phase, tof_days, dv))
-
-    results.sort(key=lambda item: item[2])
-    return results[:50]
 
 
 def hohmann_arrival_velocity(
@@ -211,10 +169,71 @@ def hohmann_arrival_velocity(
     return v_arrival, abs(v_arrival - v_target)
 
 
+def launch_window_porkchop(
+    r1: float,
+    r2: float,
+    synodic_period: float,
+    phase_step: float = 15.0,
+    tof_min: float = 1.0,
+    tof_max: float = 200.0,
+    mu: float = MU_EARTH,
+) -> list[tuple[float, float, float]]:
+    """Generate porkchop samples via repository-native Lambert costs.
+
+    Returns list of (phase_deg, tof_days, total_dv). Not a mission-design
+    product; research laboratory surface. ``synodic_period`` retained for API
+    lineage and is not required for the two-body Lambert grid.
+    """
+    del synodic_period
+    _positive_radius(r1, "r1")
+    _positive_radius(r2, "r2")
+    _positive_radius(mu, "mu")
+    if phase_step <= 0 or tof_max <= tof_min:
+        return []
+
+    results: list[tuple[float, float, float]] = []
+    phase = 0.0
+    while phase < 360.0:
+        tof_days = tof_min
+        while tof_days <= tof_max:
+            tof_s = tof_days * 86400.0
+            try:
+                phase_rad = math.radians(phase)
+                # avoid near-0 transfer angle singularity
+                if abs(math.sin(phase_rad)) < 1e-3 and abs(math.cos(phase_rad) - 1.0) < 1e-3:
+                    tof_days += 5.0
+                    continue
+                dv = lambert_transfer_cost(r1, r2, tof_s, mu=mu, phase_angle_rad=phase_rad)
+                if math.isfinite(dv) and 0 < dv < 20000:
+                    results.append((phase, tof_days, dv))
+            except (ValueError, ZeroDivisionError, OverflowError):
+                pass
+            tof_days += 5.0
+        phase += phase_step
+
+    results.sort(key=lambda item: item[2])
+    return results[:50]
+
+
 def intercept_velocity(
     r1: float, r2: float, tof: float, mu: float = MU_EARTH
 ) -> tuple[float, float]:
-    """Historical API alias; not a Lambert or time-of-flight intercept solver."""
+    """Lambert-informed arrival speed and circularization delta-v.
+
+    Places coplanar positions at 180 deg separation for a determinate geometry.
+    For arbitrary phase use ``solve_lambert`` directly.
+    """
     if not math.isfinite(tof) or tof <= 0:
         raise ValueError("tof must be finite and positive")
-    return hohmann_arrival_velocity(r1, r2, mu)
+    _positive_radius(r1, "r1")
+    _positive_radius(r2, "r2")
+    _positive_radius(mu, "mu")
+    from alpha.lambert import solve_lambert
+
+    r1v = (r1, 0.0, 0.0)
+    r2v = (-r2, 0.0, 0.0)
+    sol = solve_lambert(r1v, r2v, tof, mu=mu, short_way=True)
+    v_arrival = (sol.v2[0] ** 2 + sol.v2[1] ** 2 + sol.v2[2] ** 2) ** 0.5
+    v_target = math.sqrt(mu / r2)
+    return v_arrival, abs(v_arrival - v_target)
+
