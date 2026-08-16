@@ -7,6 +7,18 @@
     "classical-transfer-estimation",
     "plane-change-estimation",
     "bounded-j2-secular-rate-modeling",
-    "local-orbital-math-verification"
-  ]
+    "local-orbital-math-verification",
+    "deterministic-local-orbital-mechanics-calculation",
+    "repository-native-lambert-two-body",
+    "lambert-cost-porkchop-samples"
+  ],
+  "planes": {
+    "verified": [
+      "deterministic-local-orbital-mechanics-calculation"
+    ],
+    "implemented": [
+      "repository-native-lambert-two-body",
+      "lambert-cost-porkchop-samples"
+    ]
+  }
 }
