@@ -1,72 +1,55 @@
 {
-  "schema": "glaciereq.repo-target-contract.v2",
-  "identity": {
-    "repository_id": "GlacierEQ/spacex-orbital-mechanics",
-    "canonical_identity": "orbital-mechanics and astrodynamics numerical-method engineering laboratory",
-    "non_affiliation": "independent GlacierEQ portfolio system; no SpaceX affiliation, endorsement, proprietary trajectory access, or flight authority"
-  },
-  "authority": {
-    "projection_non_interference": "GlacierEQ/AKOS@09660d20fe1cfe03de169ce327cbe0e86f054e63/governance/projection_non_interference.v1.json",
-    "capability_planes": "machine/capability-planes.json",
-    "rule": "current evidence constrains projection claimability; the target contract preserves future numerical-method architecture independently"
+  "schema": "glaciereq.repo-target-contract.v4",
+  "repository": "GlacierEQ/spacex-orbital-mechanics",
+  "identity": "orbital-mechanics and astrodynamics numerical-method engineering laboratory",
+  "non_affiliation": "independent GlacierEQ portfolio system; no SpaceX affiliation, endorsement, proprietary trajectory access, or flight authority",
+  "apex": {
+    "contract": "GlacierEQ/AKOS/governance/apex_projection_evolution.v2.json@main",
+    "capability_graph": "machine/capability-planes.json",
+    "selection_mode": "CURRENT_BEST_REVISABLE",
+    "rule": "current implementation is selected per capability, remains challengeable, and may be replaced or composed when stronger verified engineering appears"
   },
   "implementation_checkpoint": {
     "state": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
     "implemented": true,
     "tested": true,
     "deployed": false,
-    "reference_only_paths": [
-      "src/lambert_solver.cpp",
-      "src/orbital_integrator.jl"
-    ],
-    "lambert": "src/alpha/lambert.py"
+    "selected_paths": ["src/alpha/kepler.py", "src/alpha/lambert.py", "src/omega/orbit_planner.py"],
+    "donor_paths": ["src/lambert_solver.cpp", "src/orbital_integrator.jl"]
   },
   "evidence_checkpoint": {
     "verified_capability": "deterministic-local-orbital-mechanics-calculation",
     "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
-    "canonical_proof_head": "COUNTER_ENGINEERING_LIVE_HEAD",
-    "claim_ceiling_applies_to": "projection",
-    "prior_truth_harden_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
+    "verified_checkpoint_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "restored_capability_token": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY",
+    "claim_ceiling_applies_to": "projection"
   },
   "target_architecture": {
-    "status": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+    "status": "ACTIVE_FRONTIER",
     "source": "machine/capability-planes.json#target",
     "objectives": [
-      "implement and verify a real time-of-flight Lambert boundary-value solver",
+      "bind fresh full-suite proof to the restored time-of-flight Lambert boundary-value solver",
       "advance the Julia reference to higher-order or adaptive two-body propagation",
       "develop N-body and perturbation-aware propagation as a separately verified research capability",
       "build reproducible energy angular-momentum convergence and accumulated-error benchmarks",
       "develop generic rendezvous and transfer-planning workflows",
-      "expose a governed programmatic orbital-calculation service",
-      "publish bounded orbital events into a governed orchestration or agent integration plane",
+      "expose a programmatic orbital-calculation service",
+      "publish bounded orbital events into an orchestration or agent integration plane",
       "benchmark numerical performance and stability across solver strategies",
-      "N-body and perturbation-aware orbital propagation",
-      "programmatic orbital-calculation service",
-      "governed orbital-event or agent integration",
-      "higher-order integrator suite",
-      "mission design optimization",
-      "covariance realism",
-      "sensor fusion",
-      "operator console"
+      "develop higher-order integrator, mission-design optimization, covariance realism, sensor-fusion, and operator-console research planes"
     ],
-    "promotion_rule": "each objective remains target state until implementation and source-bound proof exist; unsupported historical claims are not revived as current facts"
+    "advance_rule": "each objective remains visible until implementation and source-bound evidence support it, a stronger objective replaces it, or explicit capability-loss accounting justifies retirement"
   },
   "nonclaims": [
-    "no production Lambert solver",
+    "no production Lambert solver claim without fresh post-restoration proof",
     "no current N-body or high-precision long-duration propagator proof",
     "no flight-dynamics guidance navigation rendezvous or command authority",
-    "no real telemetry ephemeris MCP provider or mesh integration",
+    "no real telemetry ephemeris provider or mesh integration",
     "no production performance safety certification or deployment"
   ],
-  "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
-  "verified_capability": "deterministic-local-orbital-mechanics-calculation",
-  "implemented_capability": "repository-native-lambert-two-body",
-  "current": {
-    "deployed": false
-  },
   "recovery": {
     "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15",
-    "action": "restored repository-native Lambert solver; expanded truth planes instead of deleting power",
+    "action": "preserve the restored repository-native Lambert solver as selected research capability while expanding proof instead of deleting power",
     "law": "MAXIMUM_COHERENT_ADVANCE"
   }
 }
