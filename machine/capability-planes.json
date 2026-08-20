@@ -1,19 +1,20 @@
 {
-  "schema": "glaciereq.repository-capability-planes.v1",
+  "schema": "glaciereq.repository-capability-evolution.v2",
   "repository": "GlacierEQ/spacex-orbital-mechanics",
-  "governance_authority": {
-    "repository": "GlacierEQ/AKOS",
-    "canonical_commit": "09660d20fe1cfe03de169ce327cbe0e86f054e63",
-    "contract": "governance/projection_non_interference.v1.json"
+  "apex": {
+    "contract": "GlacierEQ/AKOS/governance/apex_projection_evolution.v2.json@main",
+    "selection_mode": "CURRENT_BEST_REVISABLE",
+    "operator_objective_precedence": true,
+    "capability_donor_preservation": true
   },
   "provenance": {
     "pre_truth_hardening_head": "3c37d66ff68846420036a9e714d2e3b2021451db",
     "truth_hardening_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
-    "current_parent_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "verified_parent_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
     "historical_intent_source": "README.md@3c37d66ff68846420036a9e714d2e3b2021451db",
-    "rule": "historical intent is preserved only as provenance or target state; claims disproven by current source inspection are not restored as implementation facts"
+    "rule": "historical intent remains provenance or target state; source inspection and evidence determine current implementation claims"
   },
-  "canonical": {
+  "intent": {
     "identity": "orbital-mechanics and astrodynamics numerical-method engineering laboratory",
     "original_intent": [
       "orbital transfer and maneuver calculation",
@@ -22,7 +23,7 @@
       "higher-fidelity numerical orbital dynamics",
       "rendezvous and transfer-planning workflows",
       "programmatic orbital calculation services",
-      "governed orchestration integration"
+      "orchestration integration"
     ],
     "non_affiliation": "independent GlacierEQ portfolio system; no SpaceX affiliation, endorsement, proprietary trajectory access, or flight authority"
   },
@@ -34,14 +35,17 @@
       "classical-transfer-estimation",
       "plane-change-estimation",
       "bounded-j2-secular-rate-modeling",
-      "local-orbital-math-verification"
+      "local-orbital-math-verification",
+      "repository-native-lambert-two-body",
+      "lambert-cost-porkchop-sampling"
     ],
     "reference_or_partial": [
-      "C++ classical Hohmann transfer-speed reference in the historical lambert_solver.cpp path",
-      "Julia first-order two-body Euler propagation reference"
+      "C++ classical Hohmann transfer-speed reference in src/lambert_solver.cpp",
+      "Julia first-order two-body Euler propagation reference in src/orbital_integrator.jl"
     ],
     "source_paths": [
       "src/alpha/kepler.py",
+      "src/alpha/lambert.py",
       "src/omega/orbit_planner.py",
       "src/lambert_solver.cpp",
       "src/orbital_integrator.jl"
@@ -50,114 +54,101 @@
   "evidence": {
     "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
     "verified_capability": "deterministic-local-orbital-mechanics-calculation",
-    "canonical_proof_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "verified_checkpoint_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
     "proof_receipts": [
+      {"kind": "github_actions", "name": "Public Orbital Math Truth Gate", "id": 31534343810, "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4", "conclusion": "success"},
+      {"kind": "github_actions", "name": "CI", "id": 31534343822, "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4", "conclusion": "success"}
+    ],
+    "restored_capability_evidence": {
+      "capability": "repository-native-lambert-two-body",
+      "path": "src/alpha/lambert.py",
+      "token": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY",
+      "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15"
+    },
+    "rule": "verified checkpoints constrain current claims but do not erase restored or research-plane mechanisms that require fresh proof"
+  },
+  "selection": {
+    "mode": "CURRENT_BEST_REVISABLE",
+    "challengeable": true,
+    "capabilities": [
       {
-        "kind": "github_actions",
-        "name": "Public Orbital Math Truth Gate",
-        "id": 31534343810,
-        "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
-        "conclusion": "success"
+        "capability": "kepler-equation-solving",
+        "implementation_refs": ["src/alpha/kepler.py"],
+        "evidence_refs": ["LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY", "github-actions:31534343810", "github-actions:31534343822"],
+        "reason": "verified current implementation for deterministic local Kepler solving"
       },
       {
-        "kind": "github_actions",
-        "name": "CI",
-        "id": 31534343822,
-        "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
-        "conclusion": "success"
+        "capability": "classical-orbital-transfer-estimation",
+        "implementation_refs": ["src/omega/orbit_planner.py", "src/lambert_solver.cpp"],
+        "evidence_refs": ["github-actions:31534343810"],
+        "reason": "current tested planner plus preserved C++ transfer-speed reference provide complementary value",
+        "known_limits": ["C++ reference is not a Lambert boundary-value solver"]
+      },
+      {
+        "capability": "repository-native-lambert-two-body",
+        "implementation_refs": ["src/alpha/lambert.py"],
+        "evidence_refs": ["REPOSITORY_NATIVE_LAMBERT_TWO_BODY"],
+        "reason": "restored repository-native implementation is the strongest current mechanism for Lambert two-body work, pending fresh full-suite proof",
+        "known_limits": ["fresh post-restoration verification remains required before broad public promotion"]
+      },
+      {
+        "capability": "bounded-j2-secular-rate-modeling",
+        "implementation_refs": ["src/omega/orbit_planner.py"],
+        "evidence_refs": ["github-actions:31534343810"],
+        "reason": "verified bounded local perturbation mechanism"
       }
     ],
-    "rule": "evidence constrains current projection claimability and does not replace canonical identity or future research targets"
+    "fitness_dimensions": [
+      "correctness", "capability_depth", "evidence_strength", "interoperability", "performance", "reliability", "maintainability", "human_legibility", "recency_relevance", "innovation_leverage", "composition_value", "recovery_cost"
+    ],
+    "reevaluate_on": [
+      "fresh proof is bound to the restored Lambert solver",
+      "higher-order or adaptive propagation becomes executable",
+      "N-body or perturbation-aware challengers gain benchmark evidence",
+      "numerical stability benchmarks reveal a stronger composition",
+      "the operator objective requires rendezvous or service integration"
+    ]
   },
+  "challengers": [
+    {"capability": "higher-order-two-body-propagation", "state": "PARTIAL_CHALLENGER", "source_refs": ["src/orbital_integrator.jl"], "promotion_requires": ["higher-order implementation", "convergence tests", "invariant benchmarks"]},
+    {"capability": "n-body-perturbation-aware-propagation", "state": "TARGET_CHALLENGER", "promotion_requires": ["implemented solver", "reference problems", "error analysis"]},
+    {"capability": "rendezvous-transfer-planning", "state": "TARGET_CHALLENGER", "source_refs": ["src/alpha/lambert.py", "src/omega/orbit_planner.py"], "promotion_requires": ["workflow implementation", "scenario tests", "bounded optimization evidence"]}
+  ],
+  "capability_donors": [
+    {"source": "src/lambert_solver.cpp", "unique_value": ["C++ classical Hohmann transfer-speed reference", "cross-language comparison surface"], "preserve": true},
+    {"source": "src/orbital_integrator.jl", "unique_value": ["Julia two-body propagation reference", "future higher-order integrator donor"], "preserve": true},
+    {"source": "src/alpha/lambert.py", "unique_value": ["restored time-of-flight Lambert boundary-value mechanism"], "preserve": true}
+  ],
   "projection": {
-    "public_claim_ceiling": "local deterministic orbital-math library for Kepler solving, state/element conversion, classical transfer and plane-change estimates, and bounded J2 secular-rate modeling",
+    "public_claim_ceiling": "local deterministic orbital-math library for Kepler solving, state/element conversion, classical transfer and plane-change estimates, bounded J2 secular-rate modeling, with restored Lambert research capability tracked separately until fresh proof is bound",
     "public_readme": "README.md",
     "projection_may_omit_unverified_target_state": true,
-    "projection_may_overwrite_canonical_or_target": false,
+    "projection_may_overwrite_intent_or_target": false,
     "nonclaims": [
-      "no production Lambert boundary-value solver",
-      "no N-body or high-precision long-duration propagator proof",
-      "no flight-dynamics, guidance, navigation, rendezvous, or command authority",
-      "no real telemetry, ephemeris, provider, MCP, or mesh integration",
-      "no production performance, safety certification, or deployment"
+      "no production Lambert solver claim without fresh post-restoration proof",
+      "no current N-body or high-precision long-duration propagator proof",
+      "no flight-dynamics guidance navigation rendezvous or command authority",
+      "no real telemetry ephemeris provider or mesh integration",
+      "no production performance safety certification or deployment"
     ]
   },
   "target": {
-    "status": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+    "status": "ACTIVE_FRONTIER",
     "items": [
-      {
-        "capability": "real Lambert boundary-value solver",
-        "origin": "historical README",
-        "state": "IMPLEMENTED_RESEARCH_PLANE",
-        "note": "historical C++ implementation did not solve Lambert's problem; a correct time-of-flight boundary-value solver remains a future target",
-        "path": "src/alpha/lambert.py",
-        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
-      },
-      {
-        "capability": "higher-order or adaptive two-body propagation",
-        "origin": "historical Julia integration intent",
-        "state": "PARTIALLY_IMPLEMENTED_TARGET",
-        "note": "current Julia reference is first-order Euler; higher-order and adaptive integration remain targets"
-      },
-      {
-        "capability": "N-body and perturbation-aware orbital propagation",
-        "origin": "historical README",
-        "state": "UNVERIFIED_TARGET",
-        "note": "not present in the current Julia reference; preserved as an astrodynamics research target"
-      },
-      {
-        "capability": "numerical invariants and long-duration error analysis",
-        "origin": "historical numerical-stability ambition",
-        "state": "UNVERIFIED_TARGET",
-        "note": "future benchmark target for energy, angular momentum, convergence and accumulated-error analysis"
-      },
-      {
-        "capability": "rendezvous and transfer-planning workflows",
-        "origin": "historical recruiter narrative",
-        "state": "UNVERIFIED_TARGET",
-        "note": "generic astrodynamics planning target; no current flight-agent or mission-authority claim"
-      },
-      {
-        "capability": "programmatic orbital-calculation service",
-        "origin": "historical MCP endpoint intent",
-        "state": "UNVERIFIED_TARGET",
-        "note": "generic governed service target; no current live MCP or provider integration"
-      },
-      {
-        "capability": "governed orbital-event or agent integration",
-        "origin": "historical Mastermind/APEX mesh intent",
-        "state": "UNVERIFIED_TARGET",
-        "note": "preserved as generic integration architecture without asserting a live mesh"
-      },
-      {
-        "capability": "performance and stability benchmarking across orbital solvers",
-        "origin": "historical high-precision performance narrative",
-        "state": "UNVERIFIED_TARGET",
-        "note": "future reproducible benchmark target; no current high-precision or real-time performance claim"
-      }
+      {"capability": "fully verified Lambert boundary-value solver", "origin": "historical README and restored implementation", "state": "IMPLEMENTED_RESEARCH_PLANE", "note": "src/alpha/lambert.py exists; fresh full-suite proof remains the next evidence objective", "path": "src/alpha/lambert.py", "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"},
+      {"capability": "higher-order or adaptive two-body propagation", "origin": "historical Julia integration intent", "state": "PARTIALLY_IMPLEMENTED_TARGET", "note": "current Julia reference is first-order Euler"},
+      {"capability": "N-body and perturbation-aware orbital propagation", "origin": "historical README", "state": "UNVERIFIED_TARGET", "note": "astrodynamics research target"},
+      {"capability": "numerical invariants and long-duration error analysis", "origin": "historical numerical-stability ambition", "state": "UNVERIFIED_TARGET", "note": "benchmark target for energy, angular momentum, convergence and accumulated error"},
+      {"capability": "rendezvous and transfer-planning workflows", "origin": "historical recruiter narrative", "state": "UNVERIFIED_TARGET", "note": "generic astrodynamics planning target"},
+      {"capability": "programmatic orbital-calculation service", "origin": "historical endpoint intent", "state": "UNVERIFIED_TARGET", "note": "service target; no current live integration"},
+      {"capability": "orbital-event or agent integration", "origin": "historical mesh intent", "state": "UNVERIFIED_TARGET", "note": "integration target without asserting live connectivity"},
+      {"capability": "performance and stability benchmarking across orbital solvers", "origin": "historical performance narrative", "state": "UNVERIFIED_TARGET", "note": "future reproducible benchmark target"}
     ],
-    "rule": "targets advance only through implementation and new evidence; failure to prove a target today may narrow public projection but may not erase the target"
+    "rule": "targets remain visible until realized, replaced by a stronger objective, or explicitly retired with capability-loss accounting"
   },
-  "implemented": {
-    "status": "RESTORED_BY_COUNTER_ENGINEERING",
-    "items": [
-      {
-        "capability": "real Lambert boundary-value solver",
-        "state": "IMPLEMENTED_RESEARCH_PLANE",
-        "path": "src/alpha/lambert.py",
-        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY",
-        "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15"
-      },
-      {
-        "capability": "Lambert-cost porkchop samples",
-        "state": "IMPLEMENTED_RESEARCH_PLANE",
-        "path": "src/omega/orbit_planner.py",
-        "evidence": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
-      }
-    ]
-  },
-  "recovery": {
-    "law": "MAXIMUM_COHERENT_ADVANCE",
-    "rule": "governance routes power; does not amputate mechanisms to satisfy a smaller proof harness"
+  "lineage": {
+    "verified_checkpoints": ["b99a1f7ea0534d3a268f9bea432399c9862bd1e4"],
+    "migration": {"from": "retired freeze-oriented projection model", "to": "APEX capability evolution graph", "status": "complete", "recovery_incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15"},
+    "recovery_rule": "maximum coherent advance: preserve unique mechanisms, restored capability, proof receipts, target commitments, and rollback evidence before replacement or retirement"
   }
 }
