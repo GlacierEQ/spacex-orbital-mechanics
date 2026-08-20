@@ -1,88 +1,54 @@
 {
-  "schema": "glaciereq.repo-excellence-state.v2",
+  "schema": "glaciereq.repo-excellence-state.v3",
   "repository": "GlacierEQ/spacex-orbital-mechanics",
-  "principal_state": "TESTED",
   "product_state": "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE",
-  "evidence_state": "EXACT_HEAD_VERIFIED",
+  "evidence_state": "EXACT_HEAD_VERIFIED_WITH_RESTORED_RESEARCH_CAPABILITY",
   "projection_state": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
-  "target_state": "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE",
+  "target_state": "ACTIVE_FRONTIER",
+  "selection_state": "CURRENT_BEST_REVISABLE",
+  "selection_challengeable": true,
+  "capability_donor_preservation": true,
   "state_planes_ref": "machine/capability-planes.json",
   "verified_capability": "deterministic-local-orbital-mechanics-calculation",
   "evidence_token": "LOCAL_ORBITAL_MATH_NOT_FLIGHT_DYNAMICS_AUTHORITY",
   "evidence_checkpoint": {
-    "head_sha": "COUNTER_ENGINEERING_LIVE_HEAD",
-    "note": "pre-recovery checkpoint was b99a1f7; live head is recovery branch",
-    "prior_truth_harden_head": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
+    "head_sha": "b99a1f7ea0534d3a268f9bea432399c9862bd1e4",
+    "workflow_receipts": [
+      {"name": "Public Orbital Math Truth Gate", "id": 31534343810, "conclusion": "success"},
+      {"name": "CI", "id": 31534343822, "conclusion": "success"}
+    ],
+    "restored_research_capability": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
   },
   "gates": {
-    "IDENTITY_RESOLVED": {
-      "status": "PASS",
-      "evidence": "github GlacierEQ/spacex-orbital-mechanics"
-    },
-    "TARGET_CONTRACT_FROZEN": {
-      "status": "PASS",
-      "evidence": "machine/target-contract.json preserves future architecture separately from current proof"
-    },
-    "CENTRAL_MECHANISM_PRESENT": {
-      "status": "PASS",
-      "evidence": "Python Kepler/state-vector/classical-transfer engine plus bounded C++ and Julia references"
-    },
-    "DETERMINISTIC_PROOF_GREEN": {
-      "status": "PASS",
-      "evidence": "Public Orbital Math Truth Gate 31534343810 and CI 31534343822 on exact b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
-    },
-    "ADVERSARIAL_SURVIVAL": {
-      "status": "PASS",
-      "evidence": "repository-owned invariant and public-truth tests on exact proof head"
-    },
-    "OPERABLE_AND_OBSERVABLE": {
-      "status": "PASS",
-      "evidence": "repository-owned local orbital-math verification and operation surfaces"
-    },
-    "PROOF_RECEIPT_BOUND": {
-      "status": "PASS",
-      "evidence": "exact-head GitHub Actions receipts are bound to the evidence plane"
-    },
-    "AUTHORITY_BOUND": {
-      "status": "PASS",
-      "evidence": "local orbital math authority is not flight-dynamics mission or command authority"
-    },
-    "PROJECTION_TRUTH_CLOSED": {
-      "status": "PASS",
-      "evidence": "Public Orbital Math Truth Gate 31534343810"
-    },
-    "CANONICAL_POSITION_RESOLVED": {
-      "status": "PENDING",
-      "evidence": "estate-level canonical position remains independently governed"
-    },
-    "EVOLUTION_CURSOR_DEFINED": {
-      "status": "PASS",
-      "evidence": "advance target solvers and propagation research without replacing preserved exact-head evidence"
-    }
+    "IDENTITY_RESOLVED": {"status": "PASS", "evidence": "github GlacierEQ/spacex-orbital-mechanics"},
+    "CAPABILITY_GRAPH_BOUND": {"status": "PASS", "evidence": "machine/capability-planes.json uses APEX capability evolution v2"},
+    "SELECTION_CHALLENGEABLE": {"status": "PASS", "evidence": "current capability selections are CURRENT_BEST_REVISABLE"},
+    "DONOR_PRESERVATION_BOUND": {"status": "PASS", "evidence": "C++ transfer reference, Julia propagation reference, and restored Lambert solver remain explicit donors or selected mechanisms"},
+    "CENTRAL_MECHANISM_PRESENT": {"status": "PASS", "evidence": "Python Kepler/state-vector/planner engine plus restored Lambert implementation and bounded C++/Julia references"},
+    "DETERMINISTIC_PROOF_GREEN": {"status": "PASS", "evidence": "Public Orbital Math Truth Gate 31534343810 and CI 31534343822 on b99a1f7ea0534d3a268f9bea432399c9862bd1e4"},
+    "RESTORED_CAPABILITY_PRESERVED": {"status": "PASS", "evidence": "src/alpha/lambert.py remains selected research capability pending fresh expanded proof"},
+    "ADVERSARIAL_SURVIVAL": {"status": "PASS", "evidence": "repository-owned invariant and public-truth tests on exact proof checkpoint"},
+    "OPERABLE_AND_OBSERVABLE": {"status": "PASS", "evidence": "repository-owned local orbital-math verification and operation surfaces"},
+    "PROOF_RECEIPT_BOUND": {"status": "PASS", "evidence": "exact-head workflow receipts remain preserved as evidence"},
+    "SCOPE_BOUND": {"status": "PASS", "evidence": "scope is local orbital-math and astrodynamics research, not flight-dynamics mission or command control"},
+    "PROJECTION_TRUTH_CLOSED": {"status": "PASS", "evidence": "Public Orbital Math Truth Gate 31534343810"},
+    "EVOLUTION_CURSOR_DEFINED": {"status": "PASS", "evidence": "bind fresh Lambert proof, then advance higher-order propagation, N-body, rendezvous, service, and benchmark frontiers"}
   },
   "nonclaims": [
     "no SpaceX affiliation or proprietary trajectory data",
-    "no production Lambert solver",
-    "no N-body or high-precision propagator proof",
+    "no production Lambert solver claim without fresh post-restoration proof",
+    "no current N-body or high-precision propagator proof",
     "no flight-dynamics guidance navigation rendezvous or command authority",
-    "no live telemetry ephemeris MCP provider APEX AKOS or Mastermind runtime integration",
+    "no live telemetry ephemeris provider APEX AKOS or Mastermind runtime integration",
     "no production deployment performance or safety certification"
   ],
   "contract_ref": "machine/target-contract.json",
   "scores_ref": "machine/excellence-scores.json",
-  "evolution_cursor": "next:advance_preserved_orbital_target_architecture_without_projection_contamination",
-  "supersedes": {
-    "single_axis_principal_state": "TESTED",
-    "reason": "TESTED represented an evidence/projection checkpoint and incorrectly replaced product maturity and target state"
-  },
-  "implemented_capability": "repository-native-lambert-two-body",
-  "current": {
-    "deployed": false
-  },
+  "evolution_cursor": "next:bind_fresh_lambert_proof_and_compare_propagation_challengers",
   "recovery": {
     "incident": "ESTATE_CAPABILITY_NEUTRALIZATION_2026-08-15",
-    "action": "restored repository-native Lambert solver; expanded truth planes instead of deleting power",
+    "action": "preserve restored repository-native Lambert capability and expand proof rather than deleting power",
     "law": "MAXIMUM_COHERENT_ADVANCE"
   },
-  "implemented_state": "REPOSITORY_NATIVE_LAMBERT_TWO_BODY"
+  "recovery_rule": "preserve verified checkpoints, restored capability, donors, and target commitments during improvement"
 }
