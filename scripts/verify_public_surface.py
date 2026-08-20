@@ -33,32 +33,42 @@ def main() -> None:
     assert "trajectory calculation endpoint for flight agents" not in readme
     assert "hyper-scaling" not in capabilities.get("capabilities", [])
 
-    # C++ remains lineage Hohmann estimate
     assert "class LambertSolver" not in cpp
     assert "tof_seconds" not in cpp
-
-    # Python Lambert restored
     assert (ROOT / "src/alpha/lambert.py").is_file()
-    assert "repository-native" in readme.lower() or LAMBERT in readme
 
-    evidence = target.get("evidence_checkpoint", {})
-    assert evidence.get("evidence_token") == TOKEN
-    assert evidence.get("verified_capability") == (
-        "deterministic-local-orbital-mechanics-calculation"
-    )
-    assert target.get("implementation_checkpoint", {}).get("deployed") is False
-    assert target.get("target_architecture", {}).get("status") == (
-        "PRESERVED_UNVERIFIED_TARGET_ARCHITECTURE"
-    )
-    assert len(target.get("target_architecture", {}).get("objectives", [])) >= 8
+    evidence = target["evidence_checkpoint"]
+    assert evidence["evidence_token"] == TOKEN
+    assert evidence["verified_capability"] == "deterministic-local-orbital-mechanics-calculation"
+    assert evidence["verified_checkpoint_head"] == "b99a1f7ea0534d3a268f9bea432399c9862bd1e4"
+    assert evidence["restored_capability_token"] == LAMBERT
+    assert target["implementation_checkpoint"]["deployed"] is False
+    assert target["target_architecture"]["status"] == "ACTIVE_FRONTIER"
+    assert target["apex"]["selection_mode"] == "CURRENT_BEST_REVISABLE"
+    assert len(target["target_architecture"]["objectives"]) >= 8
 
-    assert planes.get("projection", {}).get("projection_may_overwrite_canonical_or_target") is False
-    impl = planes.get("implemented", {}).get("items", [])
-    impl_names = {item.get("capability") for item in impl}
-    assert "real Lambert boundary-value solver" in impl_names
+    assert planes["schema"] == "glaciereq.repository-capability-evolution.v2"
+    assert planes["apex"]["selection_mode"] == "CURRENT_BEST_REVISABLE"
+    assert planes["apex"]["capability_donor_preservation"] is True
+    assert planes["selection"]["challengeable"] is True
+    selected = {item["capability"] for item in planes["selection"]["capabilities"]}
+    assert "repository-native-lambert-two-body" in selected
+    assert len(planes["capability_donors"]) >= 3
+    assert planes["projection"]["projection_may_overwrite_intent_or_target"] is False
+    assert planes["target"]["status"] == "ACTIVE_FRONTIER"
 
-    assert excellence.get("product_state") == "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE"
-    assert excellence.get("projection_state") == TOKEN
+    targets = {item["capability"] for item in planes["target"]["items"]}
+    assert "fully verified Lambert boundary-value solver" in targets
+    assert "higher-order or adaptive two-body propagation" in targets
+    assert "N-body and perturbation-aware orbital propagation" in targets
+
+    assert excellence["schema"] == "glaciereq.repo-excellence-state.v3"
+    assert excellence["product_state"] == "FUNCTIONAL_LOCAL_ORBITAL_MATH_ENGINE"
+    assert excellence["target_state"] == "ACTIVE_FRONTIER"
+    assert excellence["selection_state"] == "CURRENT_BEST_REVISABLE"
+    assert excellence["selection_challengeable"] is True
+    assert excellence["capability_donor_preservation"] is True
+    assert excellence["evidence_checkpoint"]["restored_research_capability"] == LAMBERT
     assert "HYPER_VALIDATED" not in json.dumps(excellence, sort_keys=True)
 
     print(TOKEN)
